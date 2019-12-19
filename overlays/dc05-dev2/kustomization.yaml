@@ -4,4 +4,3 @@ namespace: dev2
 
 bases:
     - ../../services/go-test-server
-    - ../../services/go-test-server2

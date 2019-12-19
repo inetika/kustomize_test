@@ -1,10 +1,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: ${SERVICE_NAME}-istio-vs
+  name: go-test-server-istio-vs
 spec:
   hosts:
-  - "${SERVICE_NAME}.dev2.appetize-dev.com"
+  - "go-test-server.dev2.appetize-dev.com"
   gateways:
   - wildcard-http80.istio-system.svc.cluster.local
   http:
@@ -13,32 +13,32 @@ spec:
         prefix: /
     route:
     - destination:
-        host: ${SERVICE_NAME}-mesh
+        host: go-test-server-mesh
         subset: v1
       weight: 100
     - destination:
-        host: ${SERVICE_NAME}-mesh
+        host: go-test-server-mesh
         subset: v2
       weight: 0
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: ${SERVICE_NAME}-mesh
+  name: go-test-server-mesh
 spec:
   trafficPolicy:
     tls:
       # mode: ISTIO_MUTUAL
       mode: DISABLE
-  host: ${SERVICE_NAME}-mesh
+  host: go-test-server-mesh
   subsets:
   - name: v1
     labels:
       tier: backend
-      app: ${SERVICE_NAME}
+      app: go-test-server
       track: stable
   - name: v2
     labels:
       tier: backend
-      app: ${SERVICE_NAME}
+      app: go-test-server
       track: canary

@@ -12,8 +12,3 @@ vars:
     kind: Deployment
     name: go-test-server
     apiVersion: extensions/v1beta1
-- name: SERVICE_NAME
-  objref:
-    kind: Service
-    name: go-test-server
-    apiVersion: v1

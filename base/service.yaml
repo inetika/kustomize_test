@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${SERVICE_NAME}
+  name: go-test-server
   labels:
-    app: ${SERVICE_NAME}
+    app: go-test-server
     tier: backend
   annotations:
     # prometheus.io/scrape: "true"
 spec:
   selector:
-    app: ${SERVICE_NAME}
+    app: go-test-server
     tier: backend
     track: stable
   ports:
@@ -22,15 +22,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${SERVICE_NAME}-mesh
+  name: go-test-server-mesh
   labels:
-    app: ${SERVICE_NAME}
+    app: go-test-server
     tier: backend
   annotations:
     # prometheus.io/scrape: "true"
 spec:
   selector:
-    app: ${SERVICE_NAME}
+    app: go-test-server
     tier: backend
   ports:
     - name: http

@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: go-test-server
+  name: deploy
 spec:
   replicas: 1
   template:
     metadata:
-      name: go-test-server
+      name: serverName
       annotations:
         sidecar.istio.io/inject: "true"
       labels:
-        app: go-test-server
+        app: serverName
         tier: backend
         track: stable
     spec:
@@ -25,8 +25,8 @@ spec:
                   - compute
       dnsPolicy: ClusterFirst
       containers:
-        - name: go-test-server
-          image: inetika/go_test_server:1.0.3
+        - name: serverName
+          image: repo/service:tag
           imagePullPolicy: IfNotPresent
           resources:
             requests:

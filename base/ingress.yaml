@@ -6,7 +6,7 @@ metadata:
   name: ${SERVICE_NAME}-ingress
 spec:
   rules:
-  - host: ${SERVICE_NAME}.${CUST_DOMAIN}.${TLD}
+  - host: ${SERVICE_NAME}.dev2.appetize-dev.com
     http:
       paths:
       - backend:

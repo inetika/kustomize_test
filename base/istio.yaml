@@ -4,7 +4,7 @@ metadata:
   name: ${SERVICE_NAME}-istio-vs
 spec:
   hosts:
-  - "${SERVICE_NAME}.${CUST_DOMAIN}.${TLD}"
+  - "${SERVICE_NAME}.dev2.appetize-dev.com"
   gateways:
   - wildcard-http80.istio-system.svc.cluster.local
   http:

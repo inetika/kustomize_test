@@ -12,13 +12,3 @@ vars:
     kind: Deployment
     name: go-test-server
     apiVersion: extensions/v1beta1
-- name: CUST_DOMAIN
-  objref:
-    kind: Deployment
-    name: dev2
-    apiVersion: extensions/v1beta1
-- name: TLD
-  objref:
-    kind: Deployment
-    name: appetize-dev.com
-    apiVersion: extensions/v1beta1

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  name: go-test-server-ingress
+spec:
+  rules:
+  - host: go-test-server.dev2.appetize-dev.com
+    http:
+      paths:
+      - backend:
+          serviceName: go-test-server
+          servicePort: 80

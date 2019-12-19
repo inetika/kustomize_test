@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: go-test-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: go-test-server
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: go-test-server
+        tier: backend
+        track: stable
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: worker
+                  operator: In
+                  values:
+                  - compute
+      dnsPolicy: ClusterFirst
+      containers:
+        - name: go-test-server
+          image: inetika/go_test_server:1.0.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 250Mi
+              cpu: 20m
+            limits:
+              memory: 1Gi
+              cpu: "1"
+          ports:
+          - containerPort: 80
+            name: http-container
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /heartbeat
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 6
+            timeoutSeconds: 3
+          livenessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /heartbeat
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 300
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+      restartPolicy: Always

@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy
+spec:
+  template:
+    metadata:
+      name: serviceName
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: worker
+                  operator: In
+                  values:
+                  - compute      
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
